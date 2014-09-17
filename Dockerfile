@@ -63,6 +63,7 @@ RUN apt-get update\
       global \
       doxygen \
       clang \
+      clang-format-3.5 \
       m4 \
       flex \
       bison \
