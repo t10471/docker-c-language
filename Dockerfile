@@ -44,6 +44,7 @@ RUN apt-get update\
 ##      libxpm-dev \
 ##      libxt-dev \
       python-dev \
+      python-markdown \
 ##      python3-dev \
 ##      ruby-dev \
       mercurial \
