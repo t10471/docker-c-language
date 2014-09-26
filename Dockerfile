@@ -61,7 +61,8 @@ RUN apt-get update\
       binutils \
       libgoogle-perftools-dev \
       kcachegrind \
-      global \
+##      古いので自分でいれる
+##      global \
       doxygen \
       clang \
       clang-format-3.5 \
@@ -87,7 +88,8 @@ RUN apt-get update\
       libgmp10 \
       libgmp-dev \
       libncursesw5 \
-      libtinfo5
+      libtinfo5 \
+      telnet
 
 RUN apt-get remove ${OPTS_APT}\
       vim \
@@ -97,8 +99,9 @@ RUN apt-get remove ${OPTS_APT}\
       vim-common \
       vim-gui-common
 
-RUN hg clone https://code.google.com/p/vim/ /root/vim
-WORKDIR /root/vim
+RUN mkdir /root/tmp/
+RUN hg clone https://code.google.com/p/vim/ /root/tmp/vim
+WORKDIR /root/tmp/vim
 RUN ./configure --with-features=huge \
             --disable-darwin \
             --disable-selinux \
@@ -125,6 +128,18 @@ RUN checkinstall \
             --nodoc \
             --default
 
+WORKDIR /root/tmp
+RUN wget -O- http://tamacom.com/global/global-6.3.2.tar.gz | tar xz
+WORKDIR /root/tmp/global-6.3.2
+RUN ./configure
+RUN make
+RUN checkinstall \
+            --type=debian \
+            --install=yes \
+            --pkgname="global" \
+            --maintainer="ubuntu-devel-discuss@lists.ubuntu.com" \
+            --nodoc \
+            --default
 
 RUN echo "Host github.com\n\
   User git\n\
@@ -142,8 +157,15 @@ RUN echo "function share_history {\n\
 }\n\
 PROMPT_COMMAND='share_history'\n\
 shopt -u histappend\n\
-export HISTSIZE=9999\n" >> /root/.bashrc
+export HISTSIZE=9999\n\
+export GTAGSLIBPATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/include:/usr/local/include:/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed:/usr/include/x86_64-linux-gnu:/usr/include\n\
+export GTAGSCACHE=1073741824\n
+" >> /root/.bashrc
 
+
+## ダイナミックライブラリを追加
+RUN touch /etc/ld.so.conf.d/my.conf
+RUN echo '/root/workspace/HeadFistC/lib' > /etc/ld.so.conf.d/my.conf
 
 ADD dotfiles.sh /root/
 
