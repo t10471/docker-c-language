@@ -167,4 +167,4 @@ RUN touch /etc/ld.so.conf.d/my.conf
 RUN echo '/root/workspace/HeadFistC/lib' > /etc/ld.so.conf.d/my.conf
 
 ADD dotfiles.sh /root/
-
+ADD gtags.sh /root/
