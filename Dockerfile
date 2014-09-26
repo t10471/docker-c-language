@@ -159,8 +159,7 @@ PROMPT_COMMAND='share_history'\n\
 shopt -u histappend\n\
 export HISTSIZE=9999\n\
 export GTAGSLIBPATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/include:/usr/local/include:/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed:/usr/include/x86_64-linux-gnu:/usr/include\n\
-export GTAGSCACHE=1073741824\n
-" >> /root/.bashrc
+export GTAGSCACHE=1073741824\n" >> /root/.bashrc
 
 
 ## ダイナミックライブラリを追加
