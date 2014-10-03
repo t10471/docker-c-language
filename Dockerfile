@@ -46,7 +46,7 @@ RUN apt-get update\
       python-dev \
       python-markdown \
 ##      python3-dev \
-##      ruby-dev \
+      ruby-dev \
       mercurial \
       checkinstall \
       gdb \
@@ -112,7 +112,7 @@ RUN ./configure --with-features=huge \
             --enable-pythoninterp \
 ##            --enable-python3interp \
 ##            --enable-tclinterp \
-##            --enable-rubyinterp \
+            --enable-rubyinterp \
 ##           C言語?
 ##            --enable-cscope \
 ##         日本語入力に必要らしい   
