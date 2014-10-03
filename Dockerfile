@@ -89,7 +89,9 @@ RUN apt-get update\
       libgmp-dev \
       libncursesw5 \
       libtinfo5 \
-      telnet
+      telnet \
+      mysql-client \
+      libmysqlclient-dev
 
 RUN apt-get remove ${OPTS_APT}\
       vim \
