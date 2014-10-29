@@ -143,30 +143,10 @@ RUN checkinstall \
             --nodoc \
             --default
 
-RUN echo "Host github.com\n\
-  User git\n\
-  Port 22\n\
-  Hostname github.com\n\
-  IdentityFile ~/.ssh/id_rsa_github\n\
-  TCPKeepAlive yes\n\
-  IdentitiesOnly yes\n" >> /root/.ssh/config
-
-
-RUN echo "function share_history {\n\
-    history -a\n\
-    history -c\n\
-    history -r\n\
-}\n\
-PROMPT_COMMAND='share_history'\n\
-shopt -u histappend\n\
-export HISTSIZE=9999\n\
-export GTAGSLIBPATH=/usr/lib/gcc/x86_64-linux-gnu/4.8/include:/usr/local/include:/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed:/usr/include/x86_64-linux-gnu:/usr/include\n\
-export GTAGSCACHE=1073741824\n" >> /root/.bashrc
-
 
 ## ダイナミックライブラリを追加
 RUN touch /etc/ld.so.conf.d/my.conf
-RUN echo '/root/workspace/HeadFistC/lib' > /etc/ld.so.conf.d/my.conf
+RUN echo '/home/theo/workspace/clang/HeadFistC/lib' > /etc/ld.so.conf.d/my.conf
 
-ADD dotfiles.sh /root/
-ADD gtags.sh /root/
+RUN groupadd -g 1100 theo
+RUN useradd -s /bin/false -u 1100 -g theo -G sudo -d /home/theo theo
